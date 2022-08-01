@@ -4,38 +4,25 @@ module.exports = function toReadable(number) {
         return `${units(number)}`;
      };
       if (number < 100){
-        return `${dozens(Math.floor(number/10))} ${units(number%10)}`;
+        if ((number%10) !==0){
+            return `${dozens(Math.floor(number/10))} ${units(number%10)}`;
+        };
+        return `${dozens(Math.floor(number/10))}`;
      };
     
     if ((Math.floor((number%100)/10) === 1)||(Math.floor((number%100)/10) === 0)){
-      return `${units(Math.floor(number/100))} hundred ${units(number%100)}`
+        if ((number%100) !==0){
+            return `${units(Math.floor(number/100))} hundred ${units(number%100)}`
+        };
+         return  `${units(Math.floor(number/100))} hundred`;
     };
-    return `${units(Math.floor(number/100))} hundred ${dozens(Math.floor((number%100)/10))} ${units(number%10)}`;
+    if ((number%10) !==0){
+        return `${units(Math.floor(number/100))} hundred ${dozens(Math.floor((number%100)/10))} ${units(number%10)}`;
     };
-/*let readByThree = Math.floor(numberAbs/1000);
-let three = readByThree%1000;
- while (readByThree >= 0)&&(three >0){
-    if (three <= 20){
-        result = fromOneToNineteen(three)+ result;
-     };
-     if (three > 20)&&(three < 100){
-        result =`${dozens(Math.floor(three/10))} ${fromOneToNineteen(three%10)}` + result;
-     };
-     if (three >100)&& (number < 120){
-        result =`${units(Math.floor(three/100))} hundred ${fromOneToNineteen(number%10)}` + result; 
-      };
-     if (three >= 120)&& (number < 1000){
-      result =`${units(Math.floor(three/100))} hundred ${dozens(Math.floor((three%100)/10))} ${fromOneToNineteen(number%10)}`; 
+    return `${units(Math.floor(number/100))} hundred ${dozens(Math.floor((number%100)/10))}`;
+
     };
 
-    if (range >=1){
-        result = result +`${countRange(range)}`;
-    };
-    range++;
-    three = readByThree%1000;
-    readByThree = Math.floor(readByThree/1000);
-
- };*/
 
  function units(n){
     switch(n){
@@ -91,7 +78,7 @@ function dozens(n){
         case 3:
         return 'thirty';
         case 4:
-        return 'fourty';
+        return 'forty';
         case 5:
         return 'fifty';
         case 6:
@@ -105,20 +92,4 @@ function dozens(n){
     }
 }
 
-function countRange(n){
-    switch(n){
-        case 1:
-        return 'thousand';
-        case 2:
-        return 'million';
-        case 3:
-        return 'billion';
-        case 4:
-        return 'trillion';
-        case 5:
-        return 'quadrillion';
-        case 6:
-        return 'quitillion';
-    }
-};
 
